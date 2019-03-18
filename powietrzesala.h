@@ -11,16 +11,18 @@
 #ifndef POWIETRZESALA_H
 #define POWIETRZESALA_H
 #include "sala.h"
+#include <QObject>
 
 
 
 
-class PowietrzeSala
+class PowietrzeSala : public QObject
 {
 
-
+Q_OBJECT
 
 public:
+
     PowietrzeSala();
     ~PowietrzeSala();
 
@@ -35,6 +37,9 @@ public:
 
     void obliczTempSali(double QprzenP, double QludzP, double QklimP, double VsaliP, double &tSala);
     void obliczCO2wSali(double Vchw, int &liczbaOsob, double Vkina, double &CO2Sala);
+
+signals:
+    void valueChanged(int &newValue);
 
 };
 

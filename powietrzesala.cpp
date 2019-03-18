@@ -5,6 +5,7 @@
 #include <math.h>
 #include <complex>
 #include <qstring.h>
+#include <QObject>
 
 //! Klasa opisująca parametry powietrza wewnętrznego
 /*!
