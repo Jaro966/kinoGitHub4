@@ -16,7 +16,7 @@ PowietrzeSala::PowietrzeSala()
 {
     this->CO2zadaneSala=800; /*!< stężenie zadane CO2 w powietrzu wewnętrznym [ppm] */
     this->emisjaCO2osoba=4.1667; /*!< emisja CO2 przez 1 osobę [m3 CO2/sx10e-6] */
-    this->zyskiCieplaOsoba=0.095; /*!< zyski ciepła od 1 osoby [kW] */
+    this->zyskiCieplaOsoba=95; /*!< zyski ciepła od 1 osoby [W] */
     this->CO2zadaneZewn=400; /*!< stężenie zadane CO2 w powietrzu zewnętrznym [ppm] */
     this->CO2chwilSali=450;
     this->tempZadanaSali=20; /*!< temperatura chwilowa w pomieszczeniu [deg C] */
@@ -37,8 +37,8 @@ PowietrzeSala::PowietrzeSala()
 void PowietrzeSala::obliczTempSali(double QprzenP, double QludzP, double QklimP, double VsaliP, double &tSala)
 {
     double m; /**< masa powietrza w objętości pomieszczenia [kg] */
-    double cp=2.2; /**< ciepło właściwe powietrza = 2.2 [kJ/kg*K] */
-    double sumaQ; /**< bilans mocy [kW]*/
+    double cp=2200; /**< ciepło właściwe powietrza = 2200 [J/kg*K] */
+    double sumaQ; /**< bilans mocy [W]*/
 
 
     m=VsaliP*1.2;  /**< masa powietrza [kg], 1,20 - gęstość powietrza dla 20 st. C i 45%  */
@@ -55,7 +55,7 @@ void PowietrzeSala::obliczTempSali(double QprzenP, double QludzP, double QklimP,
     /*!
       Oblicza temperaturę chwilową w sali
     */
-    tSala=(sumaQ/1000)/(m*cp)+tSala;
+    tSala=sumaQ/(m*cp)+tSala;
 
 }
 

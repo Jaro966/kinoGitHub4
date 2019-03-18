@@ -50,12 +50,12 @@ int sala::maxOsob()
  * @return straty ciepła [kW]
  * Funkcja oblicza straty ciepła przez przenikanie[W].
  * Przyjęto, iż najdłuższa ściana sali jest ścianą zewnętrzną.
- * Jeśli straty są mniejsze od zera (Qstr<0) wtedy występują zyski ciepła
+ * UWAGA: Jeśli straty są WIĘKSZE OD ZERA (Qstr>0) wtedy występują ZYSKI ciepła
  * \param[in] tempZewn temperatura zewnętrzna
  */
 void sala::Qprzen(double tempZewn, double tempWewn, double &QprzenS)
 {
-    QprzenS=this->dlugosc*this->wysokosc*this->wspK*(tempWewn-tempZewn); /**< Straty ciepła przez przenikanie [kW] */
+    QprzenS=this->dlugosc*this->wysokosc*this->wspK*(tempZewn-tempWewn); /**< Straty ciepła przez przenikanie [kW] */
 }
 
 /**

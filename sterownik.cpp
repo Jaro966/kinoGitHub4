@@ -1,4 +1,5 @@
 #include "sterownik.h"
+#include <math.h>
 
 sterownik::sterownik()
 {
@@ -24,7 +25,7 @@ sterownik::~sterownik()
  */
 double sterownik::u(double &signal, double &setpoint)
 {
-    this->umodule=signal-setpoint;
+    this->umodule=abs(signal-setpoint);/**< moduł */
     return this->umodule;
 }
 /**

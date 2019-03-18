@@ -103,6 +103,27 @@ void MainWindow::on_lineEdit_zyskiOdLudzi_returnPressed()
 
 void MainWindow::on_pushButton_Start_clicked()
 {
+    //! Dane do obliczenia chwilowej temperatury
+    /*!
+
+     */
+
+
+    signalKlimakonwektor = new(double); /**< temperatura chwilowa w sali=odczyt temperatury w strerowniku klimakonw. */
+    *signalKlimakonwektor = powietrze.tempChwilSali; /**< ustawienie temperatury początkowej w sali*/
+
+    setpointKlimakonwektor=new(double); /**< temperatura zadana sali = nastawa klimakonwektora */
+    *setpointKlimakonwektor=powietrze.tempZadanaSali; /**< ustawienie temperatury zadanej w sali */
+
+    AOklimakonwektor=new(double); /**< AnalogOutput dla klimakonwektora */
+
+    Qprz=new(double);  /**< ciepło przenikania */
+
+    Qludz=new(double); /*!< zyski ciepła od ludzi [W] */
+
+    Qklim=new(double); /*!< moc klimakonwektora [W] */
+
+
     //! Dane do obliczenia chwilowego CO2
     /*!
 
@@ -133,27 +154,16 @@ void MainWindow::on_pushButton_Start_clicked()
         pokazCO2(*signalCentrala);
         usleep(500);
 
-        kino.VsalaObl=kino.Vsala(kino.dlugosc, kino.szerokosc, kino.wysokosc); /*!< objętość sali */
+        kino.VsalaObl=kino.Vsala(kino.dlugosc, kino.szerokosc, kino.wysokosc); /*!< oblicza objętość sali */
         powietrze.obliczCO2wSali(centrala.VchCentrali, *liczbaOsob, kino.VsalaObl, *signalCentrala); /*!< oblicza stęż. CO2 chwilowe */
         sterCentr.AO(*signalCentrala, *setpointCentrala, *AOcentrala); /*!< oblicza wyjście sterownika 0...10V */
         centrala.Vcentrali(*liczbaOsob, *AOcentrala); /*!< wyznacza strumień chwilowy centrali [m3/s] */
-        cout<<"i = "<<i<<" stez CO2= "<< *signalCentrala<<endl;
-    }
-
-    signalKlimakonwektor = new(double);
-    signalKlimakonwektor = &powietrze.tempChwilSali;
-
-    setpointKlimakonwektor=new(double);
-    setpointKlimakonwektor=&powietrze.tempZadanaSali;
-
-    AOklimakonwektor=new(double); /**< AnalogOutput dla klimakonwektora */
 
 
-    Qprz=new(double);  /**< ciepło przenikania */
 
-    Qludz=new(double); /*!< zyski ciepła od ludzi [W] */
 
-    Qklim=new(double); /*!< moc klimakonwektora [W] */
+
+
 
 
     //! Obliczenie sygnału sterującego do klimakonwektora
@@ -166,11 +176,10 @@ void MainWindow::on_pushButton_Start_clicked()
      */
     kino.Qludzie(*liczbaOsob, *Qludz);
     kino.Qprzen(centrala.tempZewn, powietrze.tempChwilSali, *Qprz);
-    klimakonwektor.Qklim(powietrze.tempZadanaSali, powietrze.tempChwilSali, kino.VsalaObl, *AOklimakonwektor, *Qklim);
-    powietrze.obliczTempSali(*Qprz, *Qludz, *Qklim, kino.VsalaObl, *tSala);
-
-
-
+    klimakonwektor.Qklim(*setpointKlimakonwektor, *signalKlimakonwektor, kino.VsalaObl, *AOklimakonwektor, *Qklim);
+    powietrze.obliczTempSali(*Qprz, *Qludz, *Qklim, kino.VsalaObl, *signalKlimakonwektor);
+    cout<<"i = "<<i<<" stez CO2= "<< *signalCentrala<<" Tsali = "<<*signalKlimakonwektor<< endl;
+}
 }
 
 void MainWindow::on_pushButton_Stop_clicked()
