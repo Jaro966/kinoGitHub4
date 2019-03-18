@@ -10,7 +10,7 @@ public:
 
 
     void Qklim (double tempZadana, double tempChwil, double Vsala, double &AOklimakonwektor, double &QklimK);
-    double QklimK;
+
 
 
 };

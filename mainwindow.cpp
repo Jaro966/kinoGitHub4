@@ -150,21 +150,22 @@ void MainWindow::on_pushButton_Start_clicked()
     AOklimakonwektor=&sterKlim.AOsignal;
 
     Qprz=new(double);  /**< ciepło przenikania */
-    Qprz= &kino.QprzS; /**< straty ciepła przenikania */
 
     Qludz=new(double); /*!< zyski ciepła od ludzi [W] */
-    Qludz=&kino.QludzS; /*!< zyski ciepła od ludzi [W] */
 
     Qklim=new(double); /*!< moc klimakonwektora [W] */
-    Qklim=&klimakonwektor.QklimK; /*!< moc klimakonwektora [W] */
 
+
+    //! Obliczenie sygnału sterującego do klimakonwektora
+    /*!
+     */
+    sterKlim.AO(*signalKlimakonwektor, *setpointKlimakonwektor);
 
     //! Obliczenie strat ciepła i mocy klimakonwektora
     /*!
-
      */
-    kino.Qludzie(*liczbaOsob);
-    kino.Qprzen(centrala.tempZewn, powietrze.tempChwilSali);
+    kino.Qludzie(*liczbaOsob, *Qludz);
+    kino.Qprzen(centrala.tempZewn, powietrze.tempChwilSali, *Qprz);
     klimakonwektor.Qklim(powietrze.tempZadanaSali, powietrze.tempChwilSali, kino.VsalaObl, *AOklimakonwektor, *Qklim);
 
 

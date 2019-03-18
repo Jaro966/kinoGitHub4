@@ -34,7 +34,7 @@ PowietrzeSala::PowietrzeSala()
  * Temperatura obliczana jest w interwalłach co 1 sekunda
  * Funkcja pezekazuje przez wskaźnik wartość chwilową
  */
-void PowietrzeSala::obliczTempSali(double QchwCentr, double QchwKlima, double Qprzen, double Vs, double *tSala, int liczbaOsob)
+void PowietrzeSala::obliczTempSali(double QchwCentr, double QchwKlima, double Qprzen, double Vs, double &tSala, int liczbaOsob)
 {
     double m; /**< masa powietrza w objętości pomieszczenia [kg] */
     double cp=2.2; /**< ciepło właściwe powietrza = 2.2 [kJ/kg*K] */
@@ -55,7 +55,7 @@ void PowietrzeSala::obliczTempSali(double QchwCentr, double QchwKlima, double Qp
     /*!
       Oblicza temperaturę chwilową w sali
     */
-    *tSala=(sumaQ/1000)/(m*cp)+*tSala;
+    tSala=(sumaQ/1000)/(m*cp)+tSala;
 
 }
 

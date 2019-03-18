@@ -53,9 +53,9 @@ int sala::maxOsob()
  * Jeśli straty są mniejsze od zera (Qstr<0) wtedy występują zyski ciepła
  * \param[in] tempZewn temperatura zewnętrzna
  */
-void sala::Qprzen(double tempZewn, double tempWewn)
+void sala::Qprzen(double tempZewn, double tempWewn, double &QprzenS)
 {
-    this->QprzS=this->dlugosc*this->wysokosc*this->wspK*(tempWewn-tempZewn); /**< Straty ciepła przez przenikanie [kW] */
+    QprzenS=this->dlugosc*this->wysokosc*this->wspK*(tempWewn-tempZewn); /**< Straty ciepła przez przenikanie [kW] */
 }
 
 /**
@@ -64,11 +64,11 @@ void sala::Qprzen(double tempZewn, double tempWewn)
  * @return [W] zyski ciepła od ludzi
  * Funkcja oblicza zyski ciepła od ludzi
  */
-void sala::Qludzie(int &liczbaOsobS)
+void sala::Qludzie(int &liczbaOsobS, double &QludzS)
 {
     double lOsobSala;
     lOsobSala = double (liczbaOsobS);
-    this->QludzS=lOsobSala*95.0;
+    QludzS=lOsobSala*95.0;
 
 }
 

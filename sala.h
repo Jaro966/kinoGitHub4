@@ -9,8 +9,8 @@ public:
     ~sala();
     double Vsala(double l, double w, double h);
     int maxOsob();
-    void Qprzen(double tempZewn, double tempWewn);
-    void Qludzie(int &liczbaOsobS);
+    void Qprzen(double tempZewn, double tempWewn, double &QprzenS);
+    void Qludzie(int &liczbaOsobS, double &QludzS);
 
 
     double wysokosc;
@@ -18,8 +18,6 @@ public:
     double dlugosc;
     double VsalaObl; /*!< przechowuje objętośc sali */
     int liczbaOsob;
-    double QprzS;
-    double QludzS;
     double wspK; /*!< współczynnik przenikania ciepła */
 
 };
