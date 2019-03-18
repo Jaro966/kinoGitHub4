@@ -6,19 +6,33 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    signalKlimakonwektor = new(double); /**< temperatura chwilowa w sali=odczyt temperatury w strerowniku klimakonw. */
+    setpointKlimakonwektor=new(double); /**< temperatura zadana sali = nastawa klimakonwektora */
+    AOklimakonwektor=new(double); /**< AnalogOutput dla klimakonwektora */
+    Qprz=new(double);  /**< ciepło przenikania */
+    Qludz=new(double); /*!< zyski ciepła od ludzi [W] */
+    Qklim=new(double); /*!< moc klimakonwektora [W] */
+    signalCentrala=new(double); /**< Stężenie CO2 w sali. Równoważne odczytowi z czujnika CO2 */
+    setpointCentrala=new(double); /**< Zadane CO2 */
+    liczbaOsob=new(int);
+    AOcentrala=new(double); /**< AnalogOutput dla centrali wentylacyjne */
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    delete signalKlimakonwektor;
+    delete setpointKlimakonwektor;
+    delete AOklimakonwektor;
+    delete Qprz;
+    delete Qludz;
+    delete Qklim;
     delete signalCentrala;
     delete setpointCentrala;
     delete liczbaOsob;
     delete AOcentrala;
-    delete AOklimakonwektor;
-    delete Qprz;
 
 }
 
@@ -109,19 +123,13 @@ void MainWindow::on_pushButton_Start_clicked()
      */
 
 
-    signalKlimakonwektor = new(double); /**< temperatura chwilowa w sali=odczyt temperatury w strerowniku klimakonw. */
+
     *signalKlimakonwektor = powietrze.tempChwilSali; /**< ustawienie temperatury początkowej w sali*/
 
-    setpointKlimakonwektor=new(double); /**< temperatura zadana sali = nastawa klimakonwektora */
+
     *setpointKlimakonwektor=powietrze.tempZadanaSali; /**< ustawienie temperatury zadanej w sali */
 
-    AOklimakonwektor=new(double); /**< AnalogOutput dla klimakonwektora */
 
-    Qprz=new(double);  /**< ciepło przenikania */
-
-    Qludz=new(double); /*!< zyski ciepła od ludzi [W] */
-
-    Qklim=new(double); /*!< moc klimakonwektora [W] */
 
 
     //! Dane do obliczenia chwilowego CO2
@@ -129,16 +137,16 @@ void MainWindow::on_pushButton_Start_clicked()
 
      */
 
-    signalCentrala=new(double); /**< Stężenie CO2 w sali. Równoważne odczytowi z czujnika CO2 */
+
     signalCentrala=&powietrze.CO2chwilSali;
 
-    setpointCentrala=new(double); /**< Zadane CO2 */
+
     setpointCentrala=&powietrze.CO2zadaneSala;
 
-    liczbaOsob=new(int);
-    liczbaOsob=&kino.liczbaOsob;
 
-    AOcentrala=new(double); /**< AnalogOutput dla centrali wentylacyjne */
+    *liczbaOsob=kino.liczbaOsob;
+
+
 
 
     centrala.Vcentrali(*liczbaOsob, *AOcentrala); /**< Uruchomienie centrali. Ustalenie wydatku */
@@ -179,7 +187,12 @@ void MainWindow::on_pushButton_Start_clicked()
     klimakonwektor.Qklim(*setpointKlimakonwektor, *signalKlimakonwektor, kino.VsalaObl, *AOklimakonwektor, *Qklim);
     powietrze.obliczTempSali(*Qprz, *Qludz, *Qklim, kino.VsalaObl, *signalKlimakonwektor);
     cout<<"i = "<<i<<" stez CO2= "<< *signalCentrala<<" Tsali = "<<*signalKlimakonwektor<< endl;
+
+
 }
+
+
+
 }
 
 void MainWindow::on_pushButton_Stop_clicked()
