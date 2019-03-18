@@ -118,7 +118,7 @@ void MainWindow::on_pushButton_Start_clicked()
     liczbaOsob=&kino.liczbaOsob;
 
     AOcentrala=new(double); /**< AnalogOutput dla centrali wentylacyjne */
-    AOcentrala=&sterCentr.AOsignal;
+
 
     centrala.Vcentrali(*liczbaOsob, *AOcentrala); /**< Uruchomienie centrali. Ustalenie wydatku */
 
@@ -135,7 +135,7 @@ void MainWindow::on_pushButton_Start_clicked()
 
         kino.VsalaObl=kino.Vsala(kino.dlugosc, kino.szerokosc, kino.wysokosc); /*!< objętość sali */
         powietrze.obliczCO2wSali(centrala.VchCentrali, *liczbaOsob, kino.VsalaObl, *signalCentrala); /*!< oblicza stęż. CO2 chwilowe */
-        sterCentr.AO(*signalCentrala, *setpointCentrala); /*!< oblicza wyjście sterownika 0...10V */
+        sterCentr.AO(*signalCentrala, *setpointCentrala, *AOcentrala); /*!< oblicza wyjście sterownika 0...10V */
         centrala.Vcentrali(*liczbaOsob, *AOcentrala); /*!< wyznacza strumień chwilowy centrali [m3/s] */
         cout<<"i = "<<i<<" stez CO2= "<< *signalCentrala<<endl;
     }
@@ -147,7 +147,7 @@ void MainWindow::on_pushButton_Start_clicked()
     setpointKlimakonwektor=&powietrze.tempZadanaSali;
 
     AOklimakonwektor=new(double); /**< AnalogOutput dla klimakonwektora */
-    AOklimakonwektor=&sterKlim.AOsignal;
+
 
     Qprz=new(double);  /**< ciepło przenikania */
 
@@ -159,7 +159,7 @@ void MainWindow::on_pushButton_Start_clicked()
     //! Obliczenie sygnału sterującego do klimakonwektora
     /*!
      */
-    sterKlim.AO(*signalKlimakonwektor, *setpointKlimakonwektor);
+    sterKlim.AO(*signalKlimakonwektor, *setpointKlimakonwektor, *AOklimakonwektor);
 
     //! Obliczenie strat ciepła i mocy klimakonwektora
     /*!

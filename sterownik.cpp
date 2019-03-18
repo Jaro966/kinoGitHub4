@@ -63,13 +63,14 @@ double sterownik::d()
  * @param setpoint
  * @return
  */
-void sterownik::AO(double &signal, double &setpoint)
+void sterownik::AO(double &signal, double &setpoint, double &AOs)
 {
     this->u(signal, setpoint); /**< liczy odchyłkę: u = signal - setpoint */
     this->p(); /**< p */
     this->i(); /**< i */
     this->d(); /**< d */
     this->AOsignal=(this->pmodule+this->imodule+this->dmodule)*10.0; /**< AO=(p+i+d)*10V - sygnał 0...10V */
+    AOs=(this->pmodule+this->imodule+this->dmodule)*10.0; /**< AO=(p+i+d)*10V - sygnał 0...10V */
     //! Filtr sygnału AO.
     /*!
           Filtruje do zakresu 0...10V
@@ -78,6 +79,11 @@ void sterownik::AO(double &signal, double &setpoint)
         this->AOsignal=10;
     if (this->AOsignal<0)
         this->AOsignal=0;
+
+    if (AOs>10)
+        AOs=10;
+    if (AOs<0)
+        AOs=0;
 
 }
 

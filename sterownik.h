@@ -7,7 +7,7 @@ class sterownik
 public:
     sterownik();
     ~sterownik();
-    void AO(double &signal, double &setpoint);
+    void AO(double &signal, double &setpoint, double &AOs);
     double AI();
     double u(double &signal, double &setpoint); /**< oblicza odchyłke u=signal-setpoint */
     double p(); /**< część proporcjonalna */
