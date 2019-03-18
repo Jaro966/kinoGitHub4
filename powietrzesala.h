@@ -31,7 +31,7 @@ public:
     double CO2chwilSali; /**< przechowuje stężenie chwilowe sali */
 
 
-    void obliczTempSali(double QchwCentr, double QchwKlima, double Qprzen, double Vs, double &tSala, int liczbaOsob);
+    void obliczTempSali(double QprzenP, double QludzP, double QklimP, double VsaliP, double &tSala);
     void obliczCO2wSali(double Vchw, int &liczbaOsob, double Vkina, double &CO2Sala);
 
 };

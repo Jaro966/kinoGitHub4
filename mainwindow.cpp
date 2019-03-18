@@ -167,7 +167,7 @@ void MainWindow::on_pushButton_Start_clicked()
     kino.Qludzie(*liczbaOsob, *Qludz);
     kino.Qprzen(centrala.tempZewn, powietrze.tempChwilSali, *Qprz);
     klimakonwektor.Qklim(powietrze.tempZadanaSali, powietrze.tempChwilSali, kino.VsalaObl, *AOklimakonwektor, *Qklim);
-
+    powietrze.obliczTempSali(*Qprz, *Qludz, *Qklim, kino.VsalaObl, *tSala);
 
 
 

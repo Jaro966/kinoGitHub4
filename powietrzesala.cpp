@@ -34,14 +34,14 @@ PowietrzeSala::PowietrzeSala()
  * Temperatura obliczana jest w interwalłach co 1 sekunda
  * Funkcja pezekazuje przez wskaźnik wartość chwilową
  */
-void PowietrzeSala::obliczTempSali(double QchwCentr, double QchwKlima, double Qprzen, double Vs, double &tSala, int liczbaOsob)
+void PowietrzeSala::obliczTempSali(double QprzenP, double QludzP, double QklimP, double VsaliP, double &tSala)
 {
     double m; /**< masa powietrza w objętości pomieszczenia [kg] */
     double cp=2.2; /**< ciepło właściwe powietrza = 2.2 [kJ/kg*K] */
     double sumaQ; /**< bilans mocy [kW]*/
-    double Qludzie; /**< zyski ciepła od ludzi [kW] */
-    Qludzie=liczbaOsob*this->zyskiCieplaOsoba; /**< zyski ciepła od ludzi [kW]/
-    m=Vs*1.2;  / **< masa powietrza [kg], 1,20 - gęstość powietrza dla 20 st. C i 45%  */
+
+
+    m=VsaliP*1.2;  /**< masa powietrza [kg], 1,20 - gęstość powietrza dla 20 st. C i 45%  */
 
     //! Bilans mocy
     /*!
@@ -49,7 +49,7 @@ void PowietrzeSala::obliczTempSali(double QchwCentr, double QchwKlima, double Qp
      Ponieważ interwał czasowy to 1 sekunda
      Jest to również równanie na bilans energii dostarczonej w 1 sekundzie
     */
-    sumaQ=QchwCentr+QchwKlima+Qprzen+Qludzie;
+    sumaQ=QprzenP+QludzP+QklimP;
 
     //! Temp. chwilowa
     /*!
