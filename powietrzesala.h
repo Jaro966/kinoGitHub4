@@ -14,8 +14,10 @@
 
 
 
+
 class PowietrzeSala
 {
+
 
 
 public:

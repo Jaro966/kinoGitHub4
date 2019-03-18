@@ -119,34 +119,15 @@ void MainWindow::on_pushButton_Start_clicked()
 {
     //! Dane do obliczenia chwilowej temperatury
     /*!
-
      */
-
-
-
     *signalKlimakonwektor = powietrze.tempChwilSali; /**< ustawienie temperatury początkowej w sali*/
-
-
     *setpointKlimakonwektor=powietrze.tempZadanaSali; /**< ustawienie temperatury zadanej w sali */
-
-
-
-
     //! Dane do obliczenia chwilowego CO2
     /*!
-
      */
-
-
     signalCentrala=&powietrze.CO2chwilSali;
-
-
     setpointCentrala=&powietrze.CO2zadaneSala;
-
-
     *liczbaOsob=kino.liczbaOsob;
-
-
 
 
     centrala.Vcentrali(*liczbaOsob, *AOcentrala); /**< Uruchomienie centrali. Ustalenie wydatku */
@@ -158,9 +139,9 @@ void MainWindow::on_pushButton_Start_clicked()
         */
 
         //QObject::connect(&powietrze, &valueChanged(*signalCentrala), &powietrze, setValue(*signalCentrala));
-
+        ui->lcdNumber_CO2->display(*signalCentrala);
         pokazCO2(*signalCentrala);
-        usleep(500);
+        usleep(50000);//było 500
 
         kino.VsalaObl=kino.Vsala(kino.dlugosc, kino.szerokosc, kino.wysokosc); /*!< oblicza objętość sali */
         powietrze.obliczCO2wSali(centrala.VchCentrali, *liczbaOsob, kino.VsalaObl, *signalCentrala); /*!< oblicza stęż. CO2 chwilowe */
