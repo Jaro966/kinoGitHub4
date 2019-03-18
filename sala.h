@@ -16,7 +16,7 @@ public:
     double wysokosc;
     double szerokosc;
     double dlugosc;
-    double VsalaObl;
+    double VsalaObl; /*!< przechowuje objętośc sali */
     int liczbaOsob;
     double QprzS;
     double QludzS;

@@ -42,6 +42,7 @@ public:
     double *tSala; /*!< temperatura chwilowa sali] */
     double *Qprz; /*!< straty przenikania ciepła [W] */
     double *Qludz; /*!< zyski ciepła od ludzi [W] */
+    double *Qklim; /*!< moc klimakonektora, dodatnia dla grzania, ujemna dla chłodzenia */
 
 
 

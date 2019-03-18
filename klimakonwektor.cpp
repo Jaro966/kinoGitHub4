@@ -28,13 +28,13 @@ void klimakonwektor::Qklim(double tempZadana, double tempChwil, double Vsala, do
      jeżeli tempertura zadana>od temp w pomieszczeniu
     */
     if (tempZadana>tempChwil)
-        QklimK=Vsala*10*AOklimakonwektor/10; /**< 10 W/m3 sali */;
+        this->QklimK=Vsala*10*AOklimakonwektor/10; /**< 10 W/m3 sali */;
     //! Tryb chłodzenia klimakonwektora
     /*!
      jeżeli tempertura zadana<od temp w pomieszczeniu
     */
 
     if (tempZadana<tempChwil)
-        QklimK=Vsala*15*AOklimakonwektor/10; /**< 15 W/m3 sali */;
+        this->QklimK=Vsala*15*AOklimakonwektor/10; /**< 15 W/m3 sali */;
 }
 

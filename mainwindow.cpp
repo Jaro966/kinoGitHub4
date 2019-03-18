@@ -155,8 +155,17 @@ void MainWindow::on_pushButton_Start_clicked()
     Qludz=new(double); /*!< zyski ciepła od ludzi [W] */
     Qludz=&kino.QludzS; /*!< zyski ciepła od ludzi [W] */
 
+    Qklim=new(double); /*!< moc klimakonwektora [W] */
+    Qklim=&klimakonwektor.QklimK; /*!< moc klimakonwektora [W] */
+
+
+    //! Obliczenie strat ciepła i mocy klimakonwektora
+    /*!
+
+     */
     kino.Qludzie(*liczbaOsob);
     kino.Qprzen(centrala.tempZewn, powietrze.tempChwilSali);
+    klimakonwektor.Qklim(powietrze.tempZadanaSali, powietrze.tempChwilSali, kino.VsalaObl, *AOklimakonwektor, *Qklim);
 
 
 
