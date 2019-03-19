@@ -141,7 +141,7 @@ void MainWindow::on_pushButton_Start_clicked()
         //QObject::connect(&powietrze, &valueChanged(*signalCentrala), &powietrze, setValue(*signalCentrala));
         ui->lcdNumber_CO2->display(*signalCentrala);
         pokazCO2(*signalCentrala);
-        usleep(50000);//było 500
+        usleep(500);
 
         kino.VsalaObl=kino.Vsala(kino.dlugosc, kino.szerokosc, kino.wysokosc); /*!< oblicza objętość sali */
         powietrze.obliczCO2wSali(centrala.VchCentrali, *liczbaOsob, kino.VsalaObl, *signalCentrala); /*!< oblicza stęż. CO2 chwilowe */
@@ -183,10 +183,11 @@ void MainWindow::on_pushButton_Stop_clicked()
 
 void MainWindow::pokazCO2(double &CO2)
 {
-   emit valueChanged(CO2);
+
     QString CO2Text =QString::number(CO2);
 
     ui->lcdNumber_CO2->display(CO2);
+    ui->lcdNumber_CO2->display("");
    ui->label_12->setText(CO2Text);
    ui->plainTextEdit_CO2->appendPlainText(CO2Text);
 }
