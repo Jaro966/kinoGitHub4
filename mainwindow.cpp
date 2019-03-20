@@ -155,22 +155,23 @@ void MainWindow::on_pushButton_Start_clicked()
 
 
 
-    //! Obliczenie sygnału sterującego do klimakonwektora
-    /*!
+        //! Obliczenie sygnału sterującego do klimakonwektora
+        /*!
      */
-    sterKlim.AO(*signalKlimakonwektor, *setpointKlimakonwektor, *AOklimakonwektor);
+        sterKlim.AO(*signalKlimakonwektor, *setpointKlimakonwektor, *AOklimakonwektor);
 
-    //! Obliczenie strat ciepła i mocy klimakonwektora
-    /*!
+        //! Obliczenie strat ciepła i mocy klimakonwektora
+        /*!
      */
-    kino.Qludzie(*liczbaOsob, *Qludz);
-    kino.Qprzen(centrala.tempZewn, powietrze.tempChwilSali, *Qprz);
-    klimakonwektor.Qklim(*setpointKlimakonwektor, *signalKlimakonwektor, kino.VsalaObl, *AOklimakonwektor, *Qklim);
-    powietrze.obliczTempSali(*Qprz, *Qludz, *Qklim, kino.VsalaObl, *signalKlimakonwektor);
-    cout<<"i = "<<i<<" stez CO2= "<< *signalCentrala<<" Tsali = "<<*signalKlimakonwektor<< endl;
+        kino.Qludzie(*liczbaOsob, *Qludz);
+        kino.Qprzen(centrala.tempZewn, powietrze.tempChwilSali, *Qprz);
+        //klimakonwektor.Qklim(*setpointKlimakonwektor, *signalKlimakonwektor, kino.VsalaObl, *AOklimakonwektor, *Qklim);
+        klimakonwektor.QklimSzK(*setpointKlimakonwektor, *signalKlimakonwektor, kino.VsalaObl, *AOklimakonwektor, *Qklim);
+        powietrze.obliczTempSali(*Qprz, *Qludz, *Qklim, kino.VsalaObl, *signalKlimakonwektor);
+        cout<<"i = "<<i<<" stez CO2= "<< *signalCentrala<<" Tsali = "<<*signalKlimakonwektor<< endl;
 
 
-}
+    }
 
 
 
@@ -188,8 +189,8 @@ void MainWindow::pokazCO2(double &CO2)
 
     ui->lcdNumber_CO2->display(CO2);
     ui->lcdNumber_CO2->display("");
-   ui->label_12->setText(CO2Text);
-   ui->plainTextEdit_CO2->appendPlainText(CO2Text);
+    ui->label_12->setText(CO2Text);
+    ui->plainTextEdit_CO2->appendPlainText(CO2Text);
 }
 
 

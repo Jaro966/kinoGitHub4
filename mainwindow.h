@@ -10,6 +10,7 @@
 #include <sala.h>
 #include <centralawent.h>
 #include <klimakonwektor.h>
+#include <klimakonwektorszablon.h>
 #include <powietrzesala.h>
 #include <sterownik.h>
 

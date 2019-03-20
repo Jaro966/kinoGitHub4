@@ -41,7 +41,8 @@ HEADERS += \
     sala.h \
     MiniPID.h \
     centralawent.h \
-    sterownik.h
+    sterownik.h \
+    klimakonwektorszablon.h
 
 FORMS += \
         mainwindow.ui
