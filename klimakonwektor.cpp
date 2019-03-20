@@ -39,6 +39,16 @@ void klimakonwektor::Qklim(double tempZadana, double tempChwil, double Vsala, do
         QklimK=-Vsala*25*AOklimakonwektor/10; /**< 25 W/m3 sali */;
 }
 
+/**
+ * @brief klimakonwektor::QklimSzK
+ * @param tempZadana
+ * @param tempChwil
+ * @param Vsala
+ * @param AOklimakonwektor
+ * @param QklimK
+ * Szablon do obliczenia mocy klimakonwektora
+ * Funkcjonalność identyczna jak funkcji Qklim (powyżej)
+ */
 void klimakonwektor::QklimSzK (double tempZadana, double tempChwil, double Vsala, double &AOklimakonwektor, double &QklimK )
 {
     QklimSz(tempZadana, tempChwil, Vsala, AOklimakonwektor, QklimK);
