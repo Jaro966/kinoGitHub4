@@ -138,7 +138,7 @@ void MainWindow::on_pushButton_Start_clicked()
         /*!
         */
 
-        //QObject::connect(&powietrze, &valueChanged(*signalCentrala), &powietrze, setValue(*signalCentrala));
+
         ui->lcdNumber_CO2->display(*signalCentrala);
         pokazCO2(*signalCentrala);
         usleep(500);
